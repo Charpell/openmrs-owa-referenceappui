@@ -11,41 +11,37 @@ import { connect } from "react-redux";
 
 import Header from './presentational/common/Header/header.jsx';
 import * as AuthActions from '../redux/actions/authActions';
+import Login from './Login';
+import omrsButton from './../../img/openmrs-with-title-small.png';
 
 class App extends React.Component {
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.currentActiveSession();
   }
 
   render() {
-    if (this.props.authentication.loading) {
-      return (
-        <div id="body-wrapper">
-          <div id="app" className=" loader-position">
-            <img src="img/loading.gif"/>
-          </div>
-        </div>
-      )
-    }
     return (
-      <div>
-        <Header
-          authentication={this.props.authentication}
-          authActions={this.props}
-         />
-
+      <div className="container main-container">
+      
+          <nav className="navbar navbar-light bg-faded nav-header">
+          <img src={(omrsButton)} className="images" alt="Add On manager homepage" />
+          </nav>
+        
+          <div className="col-md-6 col-md-offset-3">
+            <Login />
+          </div>
       </div>
     )
   }
 }
 
- const mapStateToProps = (state) => {
-   const authentication = state.authentication;
-   return {
-     authentication
-   }
- }
+const mapStateToProps = (state) => {
+  const authentication = state.authentication;
+  return {
+    authentication
+  }
+}
 export default connect(mapStateToProps,
-   { ...AuthActions })
-   (App)
+  { ...AuthActions })
+  (App)
